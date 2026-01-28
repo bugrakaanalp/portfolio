@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Search, 
-  // ArrowRight silindi (kullanılmıyordu)
+  Search,
   Laptop, 
   FileText, 
   Mail, 

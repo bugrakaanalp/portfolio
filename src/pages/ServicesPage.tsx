@@ -18,7 +18,6 @@ export default function ServicesPage() {
       <CommandHint />
       <ServiceFab />
       
-      {/* State'i ve değiştirme fonksiyonunu prop olarak gönderiyoruz */}
       <Services lang={lang} setLang={setLang} />
       
     </motion.div>

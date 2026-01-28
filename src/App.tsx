@@ -35,7 +35,7 @@ function App() {
           {/* GİZLİ MENÜLER */}
           <CommandMenu />
 
-          {/* İÇERİK ALANI (Değişen Kısım) */}
+          {/* İÇERİK ALANI */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/services" element={<ServicesPage />} />

@@ -4,7 +4,6 @@ interface SectionProps {
   children: ReactNode;
   className?: string;
   id?: string;
-  /* Optional: Remove top padding if the previous element provides enough space */
   noTopPadding?: boolean; 
 }
 

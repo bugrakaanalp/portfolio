@@ -27,7 +27,6 @@ const SharpenedFocus = ({ children }: { children: React.ReactNode }) => {
 
 export default function About() {
   return (
-    // CHANGED: py-32 -> py-16 md:py-24
     <section id="about" className="py-16 md:py-24 bg-[#FDFCFD] border-t border-[#1D1D1F]/5 overflow-hidden">
       <Container>
         <SectionHeader 

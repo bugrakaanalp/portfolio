@@ -30,7 +30,7 @@ const content = {
       {
         name: "STATIC [Identity]",
         desc: "High-performance, visual-focused static structures for brand awareness.",
-        price: "$600", // CEP DOSTU BAŞLANGIÇ
+        price: "$600",
         recur: "One-time Payment",
         time: "1 Week",
         features: [
@@ -45,7 +45,7 @@ const content = {
       {
         name: "HEADLESS [CMS]",
         desc: "Modern web sites with manageable content and dynamic data structure.",
-        price: "$1,500", // REKABETÇİ ORTA SEVİYE
+        price: "$1,500",
         recur: "Standard Project",
         time: "2-3 Weeks",
         features: [
@@ -60,7 +60,7 @@ const content = {
       {
         name: "INTERACTIVE [App]",
         desc: "Web Applications containing complex data flows and user interaction.",
-        price: "$3,000+", // ULAŞILABİLİR PRO SEVİYE
+        price: "$3,000+",
         recur: "Project Based",
         time: "4-8 Weeks",
         features: [
@@ -107,7 +107,7 @@ const content = {
       {
         name: "STATİK [Kimlik]",
         desc: "Marka bilinirliği için yüksek performanslı, görsel odaklı statik yapılar.",
-        price: "₺15.000", // CEP DOSTU BAŞLANGIÇ
+        price: "₺15.000",
         recur: "Tek Seferlik Ödeme",
         time: "1 Hafta",
         features: [
@@ -122,7 +122,7 @@ const content = {
       {
         name: "HEADLESS [CMS]",
         desc: "İçeriği yönetilebilir, dinamik veri yapısına sahip modern web siteleri.",
-        price: "₺35.000", // START-UP DOSTU
+        price: "₺35.000",
         recur: "Standart Proje",
         time: "2-3 Hafta",
         features: [
@@ -137,7 +137,7 @@ const content = {
       {
         name: "İNTERAKTİF [Uygulama]",
         desc: "Karmaşık veri akışları ve kullanıcı etkileşimi içeren Web Uygulamaları.",
-        price: "₺70.000+", // KURUMSAL GİRİŞ SEVİYESİ
+        price: "₺70.000+",
         recur: "Proje Bazlı",
         time: "4-8 Hafta",
         features: [
@@ -273,7 +273,6 @@ export default function Services({ lang, setLang }: ServicesProps) {
                      <Mail className="w-3.5 h-3.5" />
                      {t.buttons.mail}
                    </a>
-                   {/* NUMARAYI BURAYA YAZ: 905.... */}
                    <a 
                      href="https://wa.me/905347968898" 
                      target="_blank"

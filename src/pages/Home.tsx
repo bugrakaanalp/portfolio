@@ -5,7 +5,6 @@ import Approach from '../components/Approach';
 import Work from '../components/Work';
 import CommandHint from '../components/ui/CommandHint';
 
-// Divider'ı buraya da ekleyelim veya ayrı bir ui component yapabilirsin
 const Divider = () => (
   <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12">
     <div className="w-full h-px bg-[var(--text-main)] opacity-20" />

@@ -26,7 +26,6 @@ export default function Hero() {
         />
       </div>
 
-      {/* CHANGED: pb-32 -> pb-12 */}
       <Container className="relative z-10 w-full flex flex-col items-center text-center pb-12">
         
         {/* Status Line */}

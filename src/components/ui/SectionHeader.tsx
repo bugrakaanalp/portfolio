@@ -25,7 +25,6 @@ export default function SectionHeader({ label, title, description, dark = false 
 
         {/* Playful/Expressive Typography Treatment */}
         <h2 className={`text-5xl md:text-7xl font-serif ${dark ? 'text-white' : 'text-[#1D1D1F]'} mb-8`}>
-          {/* We split the title to allow styling if needed, or just render it */}
           {title}
         </h2>
 

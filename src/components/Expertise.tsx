@@ -33,7 +33,6 @@ export default function Expertise() {
   return (
     <Section id="expertise" className="border-t border-[#1D1D1F]/5 !py-0">
       <Container>
-        {/* CHANGED: Reduced padding (pt-8 pb-4) to pull the list closer to the header */}
         <div className="pt-8 pb-0">
             <SectionHeader 
               label="The Stack" 

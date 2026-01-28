@@ -1,5 +1,5 @@
 import Container from './ui/Container';
-import { Link } from 'react-router-dom'; // Link eklendi
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   return (

@@ -38,7 +38,6 @@
     /* High contrast selection for premium feel */
     @apply selection:bg-[#1D1D1F] selection:text-white overflow-x-hidden relative;
 
-    /* --- ADDED: MATH GRID PATTERN --- */
     /* This sits behind your grain overlay */
     background-image: 
         linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
