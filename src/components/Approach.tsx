@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Container from './ui/Container';
 import SectionHeader from './ui/SectionHeader';
 import Section from './ui/Section';
+import { useLanguage } from '../context/LanguageContext';
 
 // --- VISUAL: THE HYPER-CORE ---
 const HyperCore = () => {
@@ -174,27 +175,34 @@ function Principle({
 
 // --- MAIN APPROACH COMPONENT ---
 export default function Approach({ className = '' }: { className?: string }) {
+  const { t } = useLanguage(); // <--- DİL FONKSİYONUNU ÇAĞIR
+
   return (
     <Section
       className={`bg-[var(--bg-secondary)] relative overflow-hidden transition-colors duration-300 ${className}`}
     >
       <Container className="relative z-10">
         <SectionHeader
-          label="Approach"
-          title="The Philosophy."
-          description="How I think about software is just as important as how I write it."
+          label={t("Approach", "Yaklaşım")}
+          title={t("The Philosophy.", "Felsefe.")}
+          description={t(
+            "How I think about software is just as important as how I write it.",
+            "Yazılıma dair düşünce şeklim, onu nasıl yazdığım kadar önemlidir."
+          )}
         />
         <div className="grid md:grid-cols-2 gap-16 md:gap-24 items-start">
           <div className="sticky top-32">
             <h3 className="font-serif text-3xl md:text-5xl text-[var(--text-main)] leading-tight mb-8 transition-colors duration-300">
-              Complexity belongs <br />
+              {t("Complexity belongs", "Karmaşıklık")} <br />
               <span className="italic text-[var(--text-dim)]">
-                under the hood.
+                {t("under the hood.", "sadece bir kelime.")}
               </span>
             </h3>
             <p className="font-sans text-lg text-[var(--text-muted)] leading-relaxed max-w-sm mb-8 transition-colors duration-300">
-              Great software feels linear. My goal is to bridge the gap between
-              heavy engineering requirements and a frictionless user experience.
+              {t(
+                "Great software feels linear. My goal is to bridge the gap between heavy engineering requirements and a frictionless user experience.",
+                "Harika bir yazılım doğrusal hissettirir. Amacım, ağır mühendislik gereksinimleri ile sürtünmesiz kullanıcı deneyimi arasındaki boşluğu doldurmaktır."
+              )}
             </p>
 
             <HyperCore />
@@ -203,55 +211,61 @@ export default function Approach({ className = '' }: { className?: string }) {
           <div className="space-y-16">
             <Principle
               number="01"
-              title="Intentionality"
+              title={t("Intentionality", "Kasıtlılık")}
               text={
                 <>
-                  I don't write code until the problem is understood. Every div,
-                  every hook, and every transition exists for a{' '}
+                  {t("I don't write code until the problem is understood. Every div, every hook, and every transition exists for a ", "Sorun anlaşılana kadar kod yazmam. Her div, her hook ve her geçiş ")}
                   <span className="font-mono text-xs uppercase tracking-widest border-b border-[var(--text-dim)]">
-                    specific
+                    {t("specific", "belirli")}
                   </span>{' '}
-                  user-centric reason.
+                  {t("user-centric reason.", "ve kullanıcı odaklı bir neden için vardır.")}
                 </>
               }
             />
             <Principle
               number="02"
-              title="Performance as UX"
+              title={t("Performance as UX", "Deneyim Her Şeydir")}
               text={
                 <>
                   <span className="font-serif italic text-xl mr-1 font-medium text-[var(--text-main)]">
-                    Fast
+                    {t("Fast", "Hız")}
                   </span>
-                  isn't a feature; it's a baseline. I architect systems that
-                  maintain 60fps interaction and near-instant load times.
+                  {t(
+                    "isn't a feature; it's a baseline. I architect systems that maintain 60fps interaction and near-instant load times.",
+                    "bir özellik değil, bir standarttır. 60fps etkileşimi ve neredeyse anlık yükleme sürelerini koruyan sistemler tasarlarım."
+                  )}
                 </>
               }
             />
             <Principle
               number="03"
-              title="Resilience"
+              title={t("Resilience", "Dayanıklılık")}
               text={
                 <>
-                  Errors are inevitable;{' '}
+                  {t("Errors are inevitable; ", "Hatalar kaçınılmazdır; ")}
                   <span className="inline-block opacity-50 line-through decoration-[var(--text-dim)] decoration-1">
-                    broken
+                    {t("broken", "yanlış")}
                   </span>{' '}
-                  experiences are not. I build fault-tolerant interfaces that
-                  handle failure gracefully.
+                  {t(
+                    "experiences are not. I build fault-tolerant interfaces that handle failure gracefully.",
+                    "deneyimler değildir. Hataları zarif bir şekilde yöneten, hataya dayanıklı arayüzler inşa ederim."
+                  )}
                 </>
               }
             />
             <Principle
               number="04"
-              title="Scalability"
+              title={t("Scalability", "Ölçeklenebilirlik")}
               text={
                 <>
-                  Codebases shouldn't just work; they should{' '}
+                  {t("Codebases shouldn't just work; they should ", "Kod tabanları sadece çalışmamalı; ")}
                   <span className="font-serif text-3xl italic text-[var(--text-main)] align-baseline leading-none transition-colors duration-300">
-                    grow
+                    {t("grow", "büyümeli")}
                   </span>
-                  . I implement modular patterns and strict typing.
+                  {t(
+                    ". I implement modular patterns and strict typing.",
+                    ". Modüler desenler ve katı tipleme (strict typing) uygularım."
+                  )}
                 </>
               }
             />

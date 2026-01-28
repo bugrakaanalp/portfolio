@@ -3,15 +3,7 @@ import Container from './ui/Container';
 import SectionHeader from './ui/SectionHeader';
 import { ArrowUpRight, Github } from 'lucide-react';
 import Section from './ui/Section';
-
-const projects = [
-  { name: "auctionproject", desc: "Comprehensive auction backend system with impressive an UI.", lang: "C#, Typescript, Javascript", url: "https://github.com/bugrakaanalp/auctionproject" },
-  { name: "CollabTask", desc: "Real-time SignalR task manager.", lang: "C#, Typescript, Javascript", url: "https://github.com/bugrakaanalp/CollabTask" },
-  { name: "web-scraper-cti", desc: "CTI-focused high-perf scraper.", lang: "Go", url: "https://github.com/bugrakaanalp/web-scraper-cti" },
-  { name: "Go-Tor-Scraper", desc: "Anonymous Tor traffic routing.", lang: "Go", url: "https://github.com/bugrakaanalp/Go-Tor-Scraper-CTI" },
-  { name: "NovaCart", desc: "Strictly typed modular cart.", lang: "C#, Typescript, Javascript", url: "https://github.com/bugrakaanalp/NovaCart" },
-  { name: "Spindora AI", desc: "Modern AI platform interface.", lang: "TypeScript, Vite.js" } 
-];
+import { useLanguage } from '../context/LanguageContext'; // <--- EKLE
 
 // --- Sub-Component: Animated Dots ---
 const LoadingDots = () => {
@@ -32,13 +24,75 @@ const LoadingDots = () => {
 };
 
 export default function Work() {
+  const { t } = useLanguage(); // <--- DİL FONKSİYONUNU ÇAĞIR
+
+  // Proje verilerini bileşen içine taşıdık (Çeviri desteği için)
+  const projects = [
+    { 
+      name: "auctionproject", 
+      desc: t(
+        "Comprehensive auction backend system with impressive an UI.", 
+        "Etkileyici bir arayüze sahip kapsamlı açık artırma arka uç sistemi."
+      ), 
+      lang: "C#, Typescript, Javascript", 
+      url: "https://github.com/bugrakaanalp/auctionproject" 
+    },
+    { 
+      name: "CollabTask", 
+      desc: t(
+        "Real-time SignalR task manager.", 
+        "Gerçek zamanlı SignalR görev yöneticisi."
+      ), 
+      lang: "C#, Typescript, Javascript", 
+      url: "https://github.com/bugrakaanalp/CollabTask" 
+    },
+    { 
+      name: "web-scraper-cti", 
+      desc: t(
+        "CTI-focused high-perf scraper.", 
+        "CTI odaklı yüksek performanslı veri kazıyıcı."
+      ), 
+      lang: "Go", 
+      url: "https://github.com/bugrakaanalp/web-scraper-cti" 
+    },
+    { 
+      name: "Go-Tor-Scraper", 
+      desc: t(
+        "Anonymous Tor traffic routing.", 
+        "Anonim Tor trafik yönlendirmesi."
+      ), 
+      lang: "Go", 
+      url: "https://github.com/bugrakaanalp/Go-Tor-Scraper-CTI" 
+    },
+    { 
+      name: "NovaCart", 
+      desc: t(
+        "Strictly typed modular cart.", 
+        "Katı tipli modüler alışveriş sepeti."
+      ), 
+      lang: "C#, Typescript, Javascript", 
+      url: "https://github.com/bugrakaanalp/NovaCart" 
+    },
+    { 
+      name: "Spindora AI", 
+      desc: t(
+        "Modern AI platform interface.", 
+        "Modern yapay zeka platformu arayüzü."
+      ), 
+      lang: "TypeScript, Vite.js" 
+    } 
+  ];
+
   return (
     <Section id="work" className="border-t border-[#1D1D1F]/5">
       <Container>
         <SectionHeader 
-          label="Index" 
-          title="Selected Works" 
-          description="A curated collection of technical challenges and architectural solutions."
+          label={t("Index", "Dizin")} 
+          title={t("Selected Works", "Öne Çıkan İşlerim")} 
+          description={t(
+            "A curated collection of technical challenges and architectural solutions.",
+            "Teknik zorluklar ve mimari çözümlerden oluşan özenle seçilmiş bir koleksiyon."
+          )}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
@@ -89,7 +143,7 @@ export default function Work() {
                       <div className="flex items-center gap-2">
                         <Github className="w-4 h-4 text-[var(--text-main)]" strokeWidth={1.5} />
                         <span className="font-mono text-xs uppercase tracking-widest text-[var(--text-main)]">
-                          Source
+                          {t("Source", "Kaynak")}
                         </span>
                       </div>
                       <ArrowUpRight className="w-4 h-4 text-[var(--text-main)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -97,7 +151,7 @@ export default function Work() {
                   ) : (
                     <div className="flex items-center gap-2">
                       <span className="font-mono text-xs text-[var(--text-dim)] uppercase tracking-widest cursor-default">
-                        In Development
+                        {t("In Development", "Geliştiriliyor")}
                       </span>
                       <span className="font-mono text-xs text-[var(--text-dim)]">
                         <LoadingDots />

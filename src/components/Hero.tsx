@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import Container from './ui/Container';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero() {
+  const { t } = useLanguage(); // Çeviri fonksiyonu
   const containerRef = useRef(null);
   
   const { scrollY } = useScroll();
@@ -11,8 +13,9 @@ export default function Hero() {
 
   return (
     <section 
+      id="home" // ID eklendi (Navbar linkleri için gerekli)
       ref={containerRef} 
-      className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden pt-20" // Navbar payı için pt-20 eklendi
     >
       {/* Scroll-Reactive Ambient Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -37,28 +40,28 @@ export default function Hero() {
         >
           <div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full mt-6" />
           <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#86868B] mt-6">
-            Web Architect
+            {t('Web Architect', 'Web Mimarı')}
           </span>
           <div className="w-1.5 h-1.5 bg-[#1D1D1F] rounded-full mt-6" />
         </motion.div>
 
         {/* HEADLINE */}
-        <h1 className="font-serif text-[15vw] md:text-[12rem] leading-[0.85] text-[#1D1D1F] tracking-[-0.04em] mb-10">
+        <h1 className="font-serif text-[15vw] md:text-[12rem] leading-[0.85] text-[#1D1D1F] tracking-[-0.04em] mb-10 flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            Digital
+            {t('Digital', 'Dijital')}
           </motion.div>
           
           <motion.div
             initial={{ opacity: 0, filter: "blur(15px)", scale: 0.98, y: 20 }}
             animate={{ opacity: 1, filter: "blur(0px)", scale: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1.4, ease: "easeOut" }}
-            className="italic font-light text-[#86868B] mt-6"
+            className="italic font-light text-[#86868B] mt-2 md:mt-6"
           >
-            Craftsman.
+            {t('Craftsman.', 'Mimar')}
           </motion.div>
         </h1>
 
@@ -73,13 +76,13 @@ export default function Hero() {
           {/* THE ARCHITECTURAL BRIDGE */}
           <div className="relative mt-12">
             <p className="font-sans text-[#86868B] text-lg font-light mb-2">
-              Bridging the gap between
+              {t('Bridging the gap between', 'İki şeyi birbirine bağlıyorum')}
             </p>
             
             <div className="flex items-center gap-4 relative px-4 py-2">
               {/* Left Term */}
               <span className="font-serif italic text-xl text-[#1D1D1F] relative z-10">
-                artistic intent
+                {t('artistic intent', 'sanatsal niyet')}
               </span>
 
               {/* The Visual Connection (SVG) */}
@@ -110,7 +113,7 @@ export default function Hero() {
 
               {/* Right Term */}
               <span className="font-mono text-sm text-[#1D1D1F] relative z-10 tracking-tight">
-                engineering_reality
+                {t('engineering_reality', 'mühendislik_gerçeklik')}
               </span>
               
               {/* Architectural Bracket underneath */}

@@ -1,43 +1,62 @@
 import Container from './ui/Container';
 import SectionHeader from './ui/SectionHeader';
 import Section from './ui/Section';
-
-const stack = [
-  { 
-    id: "01", 
-    category: "Core Architecture", 
-    desc: "The foundational frameworks for scalable, type-safe web applications.", 
-    tools: ["Next.js (App Router)", "React 19", "TypeScript", "Turborepo"] 
-  },
-  { 
-    id: "02", 
-    category: "Visual Engineering", 
-    desc: "Tools for translating design systems into fluid, responsive interfaces.", 
-    tools: ["Tailwind CSS", "Framer Motion", "GSAP", "Storybook"] 
-  },
-  { 
-    id: "03", 
-    category: "Data & State", 
-    desc: "Strategies for efficient data fetching, caching, and synchronization.", 
-    tools: ["TanStack Query", "Zustand", "PostgreSQL", "Prisma"] 
-  },
-  { 
-    id: "04", 
-    category: "DevOps & Cloud", 
-    desc: "CI/CD pipelines and infrastructure as code.", 
-    tools: ["Docker", "Vercel", "AWS", "GitHub Actions"] 
-  }
-];
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Expertise() {
+  const { t } = useLanguage(); // <--- DİL FONKSİYONUNU ÇAĞIR
+
+  // Veri yapısını bileşen içine taşıdık (t() fonksiyonunu kullanabilmek için)
+  const stack = [
+    { 
+      id: "01", 
+      category: t("Core Architecture", "Çekirdek Mimari"), 
+      desc: t(
+        "The foundational frameworks for scalable, type-safe web applications.",
+        "Ölçeklenebilir, tip güvenli web uygulamaları için temel iskeletler."
+      ), 
+      tools: ["Next.js (App Router)", "React 19", "TypeScript", "Turborepo"] 
+    },
+    { 
+      id: "02", 
+      category: t("Visual Engineering", "Görsel Mühendislik"), 
+      desc: t(
+        "Tools for translating design systems into fluid, responsive interfaces.",
+        "Tasarım sistemlerini akıcı, duyarlı arayüzlere dönüştüren araçlar."
+      ), 
+      tools: ["Tailwind CSS", "Framer Motion", "GSAP", "Storybook"] 
+    },
+    { 
+      id: "03", 
+      category: t("Data & State", "Veri & Durum"), 
+      desc: t(
+        "Strategies for efficient data fetching, caching, and synchronization.",
+        "Verimli veri çekme, önbellekleme ve senkronizasyon stratejileri."
+      ), 
+      tools: ["TanStack Query", "Zustand", "PostgreSQL", "Prisma"] 
+    },
+    { 
+      id: "04", 
+      category: t("DevOps & Cloud", "DevOps & Bulut"), 
+      desc: t(
+        "CI/CD pipelines and infrastructure as code.",
+        "CI/CD süreçleri ve kod olarak altyapı."
+      ), 
+      tools: ["Docker", "Vercel", "AWS", "GitHub Actions"] 
+    }
+  ];
+
   return (
     <Section id="expertise" className="border-t border-[#1D1D1F]/5 !py-0">
       <Container>
         <div className="pt-8 pb-0">
             <SectionHeader 
-              label="The Stack" 
-              title="Technical Specifications." 
-              description="A curated toolset selected for precision, scalability, and developer experience."
+              label={t("The Stack", "Teknoloji Yığını")} 
+              title={t("Technical Specifications.", "Teknik Özellikler.")} 
+              description={t(
+                "A curated toolset selected for precision, scalability, and developer experience.",
+                "Hassasiyet, ölçeklenebilirlik ve geliştirici deneyimi için seçilmiş özel araç seti."
+              )}
             />
         </div>
 

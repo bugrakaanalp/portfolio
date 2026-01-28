@@ -12,12 +12,14 @@ import {
 } from 'lucide-react';
 import { useCommandMenu } from '../../context/CommandMenuContext';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext'; // <--- EKLE
 
 export default function CommandMenu() {
   const { isOpen, toggle, close } = useCommandMenu();
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useLanguage(); // <--- DİL FONKSİYONUNU ÇAĞIR
 
   // Klavye kısayolu dinleyicisi
   useEffect(() => {
@@ -64,55 +66,56 @@ export default function CommandMenu() {
     }
   };
 
+  // Eylemleri t() fonksiyonu ile çevrilebilir hale getirdik
   const actions = [
     { 
       id: 'home', 
-      label: 'Home', 
+      label: t('Home', 'Ana Sayfa'), 
       icon: Home, 
       shortcut: 'H', 
       action: () => handleNavigation('/') 
     },
     { 
       id: 'services', 
-      label: 'Services & Pricing', 
+      label: t('Services & Pricing', 'Hizmetler & Fiyatlandırma'), 
       icon: CreditCard, 
       shortcut: 'S', 
       action: () => handleNavigation('/services') 
     },
     { 
       id: 'work', 
-      label: 'Go to Projects', 
+      label: t('Go to Projects', 'Projelere Git'), 
       icon: Code, 
       shortcut: 'P', 
       action: () => handleNavigation('/', 'work') 
     },
     { 
       id: 'stack', 
-      label: 'View Tech Stack', 
+      label: t('View Tech Stack', 'Teknoloji Yığınını Gör'), 
       icon: Laptop, 
       shortcut: 'T', 
       action: () => handleNavigation('/', 'expertise') 
     },
     { 
       id: 'about', 
-      label: 'Read Profile', 
+      label: t('Read Profile', 'Profili Oku'), 
       icon: FileText, 
       shortcut: 'A', 
       action: () => handleNavigation('/', 'about') 
     },
     { 
       id: 'contact', 
-      label: 'Send Email', 
+      label: t('Send Email', 'E-posta Gönder'), 
       icon: Mail, 
       shortcut: 'E', 
       action: () => window.location.assign('mailto:bugrakaanalp19@gmail.com') 
     },
     { 
       id: 'source', 
-      label: 'View Source Code', 
+      label: t('View Source Code', 'Kaynak Kodunu Gör'), 
       icon: Github, 
       shortcut: 'G', 
-      action: () => window.open('https://github.com/bugrakaanalp', '_blank') 
+      action: () => window.open('https://github.com/bugrakaanalp/portfolio', '_blank') 
     },
   ];
 
@@ -153,7 +156,7 @@ export default function CommandMenu() {
                 <input 
                   autoFocus
                   className="flex-1 bg-transparent border-none outline-none px-4 text-lg font-sans text-[var(--text-main)] placeholder-[var(--text-dim)]"
-                  placeholder="Type a command..."
+                  placeholder={t("Type a command...", "Bir komut yazın...")} // <--- ÇEVİRİ
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
@@ -189,14 +192,14 @@ export default function CommandMenu() {
                   ))
                 ) : (
                   <div className="py-8 text-center text-[var(--text-dim)] text-sm">
-                    No results found.
+                    {t("No results found.", "Sonuç bulunamadı.")} {/* <--- ÇEVİRİ */}
                   </div>
                 )}
               </div>
 
               <div className="px-4 py-2 bg-[var(--bg-secondary)]/50 border-t border-[var(--border-light)] flex justify-between items-center">
                 <span className="font-mono text-[10px] text-[var(--text-dim)]">
-                  Navigate with arrows
+                  {t("Navigate with arrows", "Ok tuşlarıyla gezin")} {/* <--- ÇEVİRİ */}
                 </span>
                 <span className="font-mono text-[10px] text-[var(--text-dim)]">
                   v1.0.0

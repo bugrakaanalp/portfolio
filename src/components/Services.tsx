@@ -11,13 +11,7 @@ import {
   Smartphone,
   Zap 
 } from 'lucide-react';
-
-type Language = 'EN' | 'TR';
-
-interface ServicesProps {
-  lang: Language;
-  setLang: (lang: Language) => void;
-}
+import { useLanguage } from '../context/LanguageContext';
 
 const content = {
   EN: {
@@ -176,7 +170,8 @@ const content = {
   }
 };
 
-export default function Services({ lang, setLang }: ServicesProps) {
+export default function Services() {
+  const { lang } = useLanguage(); // Context'ten dili çekiyoruz
   const t = content[lang];
 
   return (
@@ -188,36 +183,8 @@ export default function Services({ lang, setLang }: ServicesProps) {
           description={t.header.desc}
         />
 
-        {/* --- DİL SWITCH --- */}
-        <div className="flex justify-end mb-6">
-          <div className="flex items-center p-0.5 bg-[var(--bg-card)] border border-[var(--border-light)] rounded-md">
-            <button
-              onClick={() => setLang('EN')}
-              className={`
-                px-3 py-1 text-[10px] font-mono rounded-sm transition-all duration-200
-                ${lang === 'EN' 
-                  ? 'bg-[var(--text-main)] text-[var(--bg-main)] shadow-sm' 
-                  : 'text-[var(--text-dim)] hover:text-[var(--text-main)]'}
-              `}
-            >
-              EN
-            </button>
-            <button
-              onClick={() => setLang('TR')}
-              className={`
-                px-3 py-1 text-[10px] font-mono rounded-sm transition-all duration-200
-                ${lang === 'TR' 
-                  ? 'bg-[var(--text-main)] text-[var(--bg-main)] shadow-sm' 
-                  : 'text-[var(--text-dim)] hover:text-[var(--text-main)]'}
-              `}
-            >
-              TR
-            </button>
-          </div>
-        </div>
-
         {/* 1. PAKETLER (TIERS) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
           {t.tiers.map((tier, idx) => (
             <div 
               key={idx}
@@ -273,8 +240,9 @@ export default function Services({ lang, setLang }: ServicesProps) {
                      <Mail className="w-3.5 h-3.5" />
                      {t.buttons.mail}
                    </a>
+                   {/* Numaranı yaz: 905... */}
                    <a 
-                     href="https://wa.me/905347968898" 
+                     href="https://wa.me/905XXXXXXXXXX" 
                      target="_blank"
                      rel="noopener noreferrer"
                      className="

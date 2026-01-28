@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import Services from '../components/Services';
 import CommandHint from '../components/ui/CommandHint';
 import ServiceFab from '../components/ui/ServiceFab';
 import { motion } from 'framer-motion';
 
 export default function ServicesPage() {
-  const [lang, setLang] = useState<'EN' | 'TR'>('EN');
-
   return (
     <motion.div 
       initial={{ opacity: 0 }} 
@@ -17,9 +14,7 @@ export default function ServicesPage() {
     >
       <CommandHint />
       <ServiceFab />
-      
-      <Services lang={lang} setLang={setLang} />
-      
+      <Services /> 
     </motion.div>
   );
 }

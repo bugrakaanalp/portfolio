@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import Container from './ui/Container';
 import SectionHeader from './ui/SectionHeader';
+import { useLanguage } from '../context/LanguageContext';
 
 const SharpenedFocus = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -26,15 +27,18 @@ const SharpenedFocus = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default function About() {
+  const { t } = useLanguage(); // <--- DİL FONKSİYONUNU ÇAĞIR
+
   return (
     <section id="about" className="py-16 md:py-24 bg-[#FDFCFD] border-t border-[#1D1D1F]/5 overflow-hidden">
       <Container>
         <SectionHeader 
-          label="Profile" 
-          title="The Person Behind the Code" 
+          label={t("Profile", "Profil")} 
+          title={t("The Person Behind the Code", "Klavyenin Ardındaki Kişi")} 
+          description={t("Merging technical expertise with artistic vision.", "Teknik uzmanlığı sanatsal vizyonla birleştiriyorum.")}
         />
 
-        <div className="grid md:grid-cols-12 gap-16 items-center">
+        <div className="grid md:grid-cols-12 gap-16 items-center mt-12">
           
           {/* IMAGE COLUMN */}
           <div className="md:col-span-5 relative flex justify-center md:justify-start">
@@ -51,6 +55,7 @@ export default function About() {
                 {/* The Stamp/Card - NO ROTATION */}
                 <div className="relative w-72 h-96 bg-white p-3 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.08)] transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]">
                   <div className="w-full h-full bg-[#F5F5F7] overflow-hidden relative">
+                    {/* Resim yolunu public klasörüne koyduğunu varsayıyorum */}
                     <img 
                       src="/ben-pixel.png" 
                       alt="Buğra Kaan Alp" 
@@ -70,10 +75,16 @@ export default function About() {
           <div className="md:col-span-7 space-y-10">
             <div>
               <h3 className="font-serif text-3xl md:text-5xl text-[#1D1D1F] leading-tight mb-6">
-                Based in Türkiye, operating at the intersection of <span className="italic text-[#86868B]">art direction</span> and <span className="italic text-[#86868B]">engineering</span>.
+                {t("Based in Türkiye, operating at the intersection of", "Türkiye merkezli,")} <span className="italic text-[#86868B]">{t("art direction", "sanat yönetimi")}</span> {t("and", "ve")} <span className="italic text-[#86868B]">{t("engineering", "mühendisliğin")}</span> {t("", "kesişiminde çalışıyorum.")}
               </h3>
               <p className="font-sans text-xl text-[#424245] leading-relaxed text-balance">
-                My journey began with a curiosity for how things work, evolving into an obsession with how things feel. I don't just write code; I orchestrate experiences. Whether it's a high-performance C# backend or a fluid React interface, my goal is always the same: <SharpenedFocus>absolute clarity and precision.</SharpenedFocus>
+                {t(
+                  "My journey began with a curiosity for how things work, evolving into an obsession with how things feel. I don't just write code; I orchestrate experiences. Whether it's a high-performance C# backend or a fluid React interface, my goal is always the same: ",
+                  "Yolculuğum, işlerin nasıl yürüdüğüne dair bir merakla başladı ve nesnelerin nasıl hissettirdiğine dair bir takıntıya dönüştü. Sadece kod yazmıyorum; deneyimleri yönetiyorum. İster yüksek performanslı bir C# backend, ister akıcı bir React arayüzü olsun, hedefim her zaman aynı: "
+                )}
+                <SharpenedFocus>
+                  {t("absolute clarity and precision.", "mutlak netlik ve hassasiyet.")}
+                </SharpenedFocus>
               </p>
             </div>
           </div>
