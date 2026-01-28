@@ -1,0 +1,96 @@
+/* 1. Typography Imports */
+/* Playfair (Editorial), JetBrains (Code), Inter (UI), Caveat (Handwriting) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Caveat:wght@500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Design Tokens */
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-hand: 'Caveat', cursive;
+  
+  /* LIGHT MODE VARIABLES (Mapped to Component Usage) */
+  --bg-main: #FDFCFD;
+  --bg-secondary: #F5F5F7;
+  --bg-card: #FFFFFF;
+
+  --text-main: #1D1D1F;
+  --text-muted: #424245;
+  --text-dim: #86868B;
+
+  --border-light: #E8E8ED;
+  --border-dark: #1D1D1F;
+
+  --color-accent: #5E5CE6; /* Indigo */
+}
+
+@layer base {
+  html {
+    @apply bg-[var(--bg-main)] text-[var(--text-main)] antialiased scroll-smooth;
+  }
+  
+  body {
+    font-family: var(--font-sans);
+    /* High contrast selection for premium feel */
+    @apply selection:bg-[#1D1D1F] selection:text-white overflow-x-hidden relative;
+
+    /* --- ADDED: MATH GRID PATTERN --- */
+    /* This sits behind your grain overlay */
+    background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+    min-height: 100vh;
+  }
+
+  /* Editorial Headings */
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+  }
+
+  /* CINEMATIC GRAIN OVERLAY */
+  /* This adds the subtle texture that prevents the site from feeling "flat" */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Noise texture */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0.4; /* Subtle grain visibility */
+    mix-blend-mode: overlay;
+  }
+}
+
+@layer utilities {
+  /* Typography Utilities */
+  .font-serif { font-family: var(--font-serif); }
+  .font-sans { font-family: var(--font-sans); }
+  .font-mono { font-family: var(--font-mono); }
+  .font-handwriting { font-family: var(--font-hand); }
+  
+  /* Text Balancing for better headline wrapping */
+  .text-balance { text-wrap: balance; }
+
+  /* Glassmorphism Card Utility */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+  }
+
+  /* Custom Hover Effects */
+  .hover-lift {
+    @apply transition-transform duration-300 ease-out hover:-translate-y-1;
+  }
+}
+
+main, section, footer {
+  background-color: transparent !important;
+}
