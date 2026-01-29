@@ -1,17 +1,30 @@
 import Container from './ui/Container';
 import SectionHeader from './ui/SectionHeader';
 import Section from './ui/Section';
-import { 
-  Check, 
-  Mail, 
-  MessageCircle, 
-  Database, 
-  Layers, 
-  Globe, 
+import {
+  Check,
+  Mail,
+  MessageCircle,
+  Database,
+  Layers,
+  Globe,
   Smartphone,
-  Zap 
+  ArrowRight,
+  Scale
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+
+// --- Sub-Component ---
+const MetricBlock = ({ label, value }: { label: string; value: string }) => (
+  <div className="flex flex-col border-l border-[var(--border-light)] pl-4">
+    <span className="font-serif text-3xl text-[var(--text-main)] mb-1">
+      {value}
+    </span>
+    <span className="font-mono text-[10px] text-[var(--text-muted)] uppercase tracking-widest">
+      {label}
+    </span>
+  </div>
+);
 
 const content = {
   EN: {
@@ -78,12 +91,18 @@ const content = {
       ]
     },
     audit: {
-      title: "UI/UX & Performance Refactoring",
-      desc: "Is your current site slow? Or is the design outdated? Instead of rewriting from scratch, I analyze your existing React/Next.js project, improve code quality, and migrate it to a modern design language.",
-      cta: "Contact for Audit",
+      title: "Refactoring & Architecture",
+      desc: "Detailed code analysis for legacy projects. Improving core web vitals and migrating infrastructure to modern standards.",
       price: "$250+",
-      priceLabel: "Starting Price",
-      badge: "PERFORMANCE OPTIMIZATION"
+      priceLabel: "Consultation Fee",
+      badge: "TECHNICAL AUDIT",
+      metrics: {
+        perf: "Performance",
+        acc: "Accessibility",
+        seo: "SEO Score",
+        struct: "Structure"
+      },
+      cta: "Request Analysis"
     },
     buttons: {
       est: "EST:",
@@ -155,12 +174,18 @@ const content = {
       ]
     },
     audit: {
-      title: "UI/UX & Performans İyileştirme",
-      desc: "Mevcut siteniz yavaş mı? Veya tasarımı eskidi mi? Sıfırdan yazmak yerine, mevcut React/Next.js projenizi analiz ediyor, kod kalitesini artırıyor ve modern tasarım diline (Redesign) taşıyorum.",
-      cta: "Analiz İçin İletişim",
+      title: "Refactoring & Mimari",
+      desc: "Mevcut projeler için detaylı kod analizi. Core Web Vitals skorlarını iyileştirme ve altyapıyı modern standartlara taşıma.",
       price: "₺5.000+",
-      priceLabel: "Başlangıç Fiyatı",
-      badge: "HIZ VE PERFORMANS ANALİZİ"
+      priceLabel: "Danışmanlık Bedeli",
+      badge: "TEKNİK DENETİM",
+      metrics: {
+        perf: "Performans",
+        acc: "Erişilebilirlik",
+        seo: "SEO Skoru",
+        struct: "Yapısal Bütünlük"
+      },
+      cta: "Analiz İste"
     },
     buttons: {
       est: "SÜRE:",
@@ -171,22 +196,22 @@ const content = {
 };
 
 export default function Services() {
-  const { lang } = useLanguage(); // Context'ten dili çekiyoruz
+  const { lang } = useLanguage();
   const t = content[lang];
 
   return (
-    <Section id="services" className="border-t border-[var(--border-light)] pb-32">
+    <Section id="services" className="border-t-2 border-[var(--border-dark)] pb-32 bg-[var(--bg-main)]">
       <Container>
-        <SectionHeader 
-          label={t.header.label} 
-          title={t.header.title} 
+        <SectionHeader
+          label={t.header.label}
+          title={t.header.title}
           description={t.header.desc}
         />
 
         {/* 1. PAKETLER (TIERS) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
           {t.tiers.map((tier, idx) => (
-            <div 
+            <div
               key={idx}
               className="
                 group relative flex flex-col p-8
@@ -222,42 +247,41 @@ export default function Services() {
               </ul>
 
               <div className="mt-auto pt-6 border-t border-[var(--border-light)] flex flex-col gap-4">
-                 <span className="font-mono text-[10px] text-[var(--text-dim)] uppercase">
-                   {t.buttons.est} {tier.time}
-                 </span>
-                 <div className="flex gap-3 w-full">
-                   <a 
-                     href={`mailto:bugrakaanalp19@gmail.com?subject=${tier.name} Inquiry`}
-                     className="
-                       flex-1 flex items-center justify-center gap-2 
-                       px-3 py-2.5 
-                       text-xs font-medium text-[var(--text-main)] 
-                       border border-[var(--border-light)] rounded 
-                       hover:bg-[var(--text-main)] hover:text-[var(--bg-main)] 
-                       transition-all duration-300
-                     "
-                   >
-                     <Mail className="w-3.5 h-3.5" />
-                     {t.buttons.mail}
-                   </a>
-                   {/* Numaranı yaz: 905... */}
-                   <a 
-                     href="https://wa.me/905XXXXXXXXXX" 
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="
-                       flex-1 flex items-center justify-center gap-2 
-                       px-3 py-2.5 
-                       text-xs font-medium text-[var(--text-main)] 
-                       border border-[var(--border-light)] rounded 
-                       hover:bg-[var(--text-main)] hover:text-[var(--bg-main)] 
-                       transition-all duration-300
-                     "
-                   >
-                     <MessageCircle className="w-3.5 h-3.5" />
-                     {t.buttons.whatsapp}
-                   </a>
-                 </div>
+                <span className="font-mono text-[10px] text-[var(--text-dim)] uppercase">
+                  {t.buttons.est} {tier.time}
+                </span>
+                <div className="flex gap-3 w-full">
+                  <a
+                    href={`mailto:bugrakaanalp19@gmail.com?subject=${tier.name} Inquiry`}
+                    className="
+                      flex-1 flex items-center justify-center gap-2 
+                      px-3 py-2.5 
+                      text-xs font-medium text-[var(--text-main)] 
+                      border border-[var(--border-light)] rounded-sm
+                      hover:bg-[var(--text-main)] hover:text-[var(--bg-main)] 
+                      transition-all duration-300
+                    "
+                  >
+                    <Mail className="w-3.5 h-3.5" />
+                    {t.buttons.mail}
+                  </a>
+                  <a
+                    href="https://wa.me/905347968898"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="
+                      flex-1 flex items-center justify-center gap-2 
+                      px-3 py-2.5 
+                      text-xs font-medium text-[var(--text-main)] 
+                      border border-[var(--border-light)] rounded-sm
+                      hover:bg-[var(--text-main)] hover:text-[var(--bg-main)] 
+                      transition-all duration-300
+                    "
+                  >
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    {t.buttons.whatsapp}
+                  </a>
+                </div>
               </div>
             </div>
           ))}
@@ -267,60 +291,94 @@ export default function Services() {
 
         {/* 2. TEKNİK DETAYLAR & MODÜLLER */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-           <div className="lg:col-span-1">
-             <h3 className="font-serif text-2xl text-[var(--text-main)]">
-               {t.modules.title}
-             </h3>
-             <p className="font-sans text-sm text-[var(--text-muted)] mt-4 leading-relaxed">
-               {t.modules.desc}
-             </p>
-           </div>
+          <div className="lg:col-span-1">
+            <h3 className="font-serif text-2xl text-[var(--text-main)]">
+              {t.modules.title}
+            </h3>
+            <p className="font-sans text-sm text-[var(--text-muted)] mt-4 leading-relaxed">
+              {t.modules.desc}
+            </p>
+          </div>
 
-           <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
-             {t.modules.items.map((mod, idx) => (
-               <div key={idx} className="group flex gap-4 items-start">
-                 <div className="p-3 bg-[var(--bg-secondary)] border border-[var(--border-light)] rounded-sm group-hover:border-[var(--text-main)] transition-colors">
-                   <mod.icon className="w-5 h-5 text-[var(--text-main)]" />
-                 </div>
-                 <div>
-                   <h4 className="font-sans font-medium text-[var(--text-main)] mb-1">
-                     {mod.title}
-                   </h4>
-                   <p className="font-sans text-xs text-[var(--text-muted)] leading-relaxed mb-2">
-                     {mod.desc}
-                   </p>
-                   <span className="font-mono text-[10px] text-[var(--text-dim)] bg-[var(--bg-secondary)] px-2 py-0.5 rounded border border-[var(--border-light)]">
-                     {mod.price}
-                   </span>
-                 </div>
-               </div>
-             ))}
-           </div>
+          <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+            {t.modules.items.map((mod, idx) => (
+              <div key={idx} className="group flex gap-4 items-start">
+                <div className="p-3 bg-[var(--bg-secondary)] border border-[var(--border-light)] rounded-sm group-hover:border-[var(--text-main)] transition-colors">
+                  <mod.icon className="w-5 h-5 text-[var(--text-main)]" />
+                </div>
+                <div>
+                  <h4 className="font-sans font-medium text-[var(--text-main)] mb-1">
+                    {mod.title}
+                  </h4>
+                  <p className="font-sans text-xs text-[var(--text-muted)] leading-relaxed mb-2">
+                    {mod.desc}
+                  </p>
+                  <span className="font-mono text-[10px] text-[var(--text-dim)] bg-[var(--bg-secondary)] px-2 py-0.5 rounded border border-[var(--border-light)]">
+                    {mod.price}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+        <div className="mt-24 border-2 border-[var(--border-light)] bg-[var(--bg-card)]">
+          <div className="grid md:grid-cols-2">
 
-        {/* 3. AUDIT SERVICES */}
-        <div className="mt-24 border border-[var(--border-light)] bg-[var(--bg-card)]/50 p-6 md:p-10 hover:border-[var(--text-main)] transition-all">
-           <div className="flex flex-col md:flex-row items-start justify-between gap-8">
-             <div className="flex-1">
-               <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-5 bg-amber-500/10 border border-amber-500/20 rounded text-amber-500 font-sans text-xs md:text-sm font-bold tracking-wide uppercase">
-                 <Zap className="w-4 h-4" />
-                 <span>{t.audit.badge}</span>
-               </div>
-               <h3 className="font-serif text-xl text-[var(--text-main)] mb-2">
-                 {t.audit.title}
-               </h3>
-               <p className="font-sans text-sm text-[var(--text-muted)] leading-relaxed max-w-2xl">
-                 {t.audit.desc}
-               </p>
-             </div>
-             <div className="shrink-0 text-right md:pt-8">
-                <span className="block font-serif text-xl text-[var(--text-main)]">{t.audit.price}</span>
-                <button className="mt-2 text-[10px] font-mono uppercase text-[var(--text-main)] border-b border-[var(--text-main)] hover:opacity-70 transition-opacity">
+            {/* SOL: İçerik */}
+            <div className="p-8 md:p-12 flex flex-col justify-center border-b md:border-b-0 md:border-r border-[var(--border-light)]">
+              <div className="flex items-center gap-2 mb-6">
+                <Scale className="w-4 h-4 text-[var(--text-main)]" />
+                <span className="font-mono text-xs font-bold text-[var(--text-main)] uppercase tracking-widest">
+                  {t.audit.badge}
+                </span>
+              </div>
+
+              <h3 className="font-serif text-3xl md:text-4xl text-[var(--text-main)] mb-6">
+                {t.audit.title}
+              </h3>
+              <p className="font-sans text-sm text-[var(--text-muted)] leading-relaxed mb-8 max-w-md">
+                {t.audit.desc}
+              </p>
+
+              <div className="flex items-center gap-8 mt-auto pt-8 border-t border-[var(--border-light)]">
+                <div>
+                  <span className="block text-[10px] font-mono text-[var(--text-dim)] uppercase mb-1">
+                    {t.audit.priceLabel}
+                  </span>
+                  <span className="font-serif text-xl text-[var(--text-main)]">
+                    {t.audit.price}
+                  </span>
+                </div>
+                <a
+                  href="mailto:bugrakaanalp19@gmail.com?subject=Code Audit Request"
+                  className="group flex items-center gap-2 text-sm font-bold text-[var(--text-main)] uppercase tracking-wider hover:opacity-70 transition-opacity"
+                >
                   {t.audit.cta}
-                </button>
-             </div>
-           </div>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+
+            {/* SAĞ: Clean Metrics */}
+            <div className="p-8 md:p-12 bg-[var(--bg-secondary)] flex flex-col justify-center">
+              <div className="grid grid-cols-2 gap-x-8 gap-y-12">
+                <MetricBlock label={t.audit.metrics.perf} value="98+" />
+                <MetricBlock label={t.audit.metrics.acc} value="100" />
+                <MetricBlock label={t.audit.metrics.seo} value="100" />
+                <MetricBlock label={t.audit.metrics.struct} value="A+" />
+              </div>
+
+              {/* Alt Bilgi Notu */}
+              <div className="mt-12 pt-6 border-t border-[var(--border-light)]">
+                <p className="font-mono text-[10px] text-[var(--text-dim)] leading-relaxed">
+                  * {lang === 'TR' ? "Analizler Google Lighthouse v10 standartlarına göre yapılır." : "Analysis based on Google Lighthouse v10 standards."}
+                </p>
+              </div>
+            </div>
+
+          </div>
         </div>
+
       </Container>
     </Section>
   );

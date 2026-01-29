@@ -14,7 +14,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   // Lazy initialization (Sayfa yenilendiğinde dili hatırlar)
   const [lang, setLangState] = useState<Language>(() => {
-    // SSR kontrolü (Next.js veya güvenli taraf için)
+    // SSR kontrolü
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('app-lang') as Language;
       return saved || 'EN';

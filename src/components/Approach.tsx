@@ -26,7 +26,6 @@ const HyperCore = () => {
     y.set(e.clientY - (rect.top + rect.height / 2));
   }
 
-  // Initializing random particles state once
   const [particles] = useState(() =>
     [...Array(20)].map(() => ({
       x: [Math.random() * 200 - 100, Math.random() * 200 - 100],
@@ -38,7 +37,7 @@ const HyperCore = () => {
 
   return (
     <div
-      className="relative w-full max-w-lg mt-16 mb-24 h-[320px] flex items-center justify-center cursor-pointer group perspective-1000"
+      className="relative w-full max-w-lg mt-16 mb-24 h-[320px] flex items-center justify-center cursor-pointer group perspective-1000 "
       onMouseMove={handleMouseMove}
       onMouseLeave={() => {
         x.set(0);
@@ -62,7 +61,7 @@ const HyperCore = () => {
           transition={{ duration: 3, repeat: Infinity }}
           className="absolute w-12 h-12 bg-[var(--text-main)] rounded-full z-20 blur-sm"
         />
-        <div className="absolute w-8 h-8 bg-white rounded-full z-30" />
+        <div className="absolute w-8 h-8 bg-[var(--bg-card)] rounded-full z-30" />
 
         {/* 2. INNER GYROSCOPE */}
         <motion.div
@@ -175,11 +174,13 @@ function Principle({
 
 // --- MAIN APPROACH COMPONENT ---
 export default function Approach({ className = '' }: { className?: string }) {
-  const { t } = useLanguage(); // <--- DİL FONKSİYONUNU ÇAĞIR
+  const { t } = useLanguage();
 
   return (
+    // ID="APPROACH" EKLENDİ - Artık Navbar buraya kaydırabilir
     <Section
-      className={`bg-[var(--bg-secondary)] relative overflow-hidden transition-colors duration-300 ${className}`}
+      id="approach"
+      className={`bg-[var(--bg-secondary)] relative overflow-hidden transition-colors duration-300 border-t-2 border-[var(--border-dark)] ${className}`}
     >
       <Container className="relative z-10">
         <SectionHeader

@@ -1,5 +1,4 @@
-/* 1. Typography Imports */
-/* Playfair (Editorial), JetBrains (Code), Inter (UI), Caveat (Handwriting) */
+/* 1. Typography Imports  */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Caveat:wght@500&display=swap');
 
 @tailwind base;
@@ -7,84 +6,91 @@
 @tailwind utilities;
 
 :root {
-  /* Design Tokens */
+  /* Design Tokens  */
   --font-serif: 'Playfair Display', serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --font-hand: 'Caveat', cursive;
   
-  /* LIGHT MODE VARIABLES (Mapped to Component Usage) */
-  --bg-main: #FDFCFD;
-  --bg-secondary: #F5F5F7;
-  --bg-card: #FFFFFF;
+  /* --- LIGHT MODE (Mevcut Blueprint) --- */
+  --bg-main: #FDFCFD;        /* Kağıt Beyazı */
+  --bg-secondary: #F5F5F7;   /* Hafif Gri Alanlar */
+  --bg-card: #FFFFFF;        /* Kartlar */
 
-  --text-main: #1D1D1F;
-  --text-muted: #424245;
-  --text-dim: #86868B;
+  --text-main: #1D1D1F;      /* Mürekkep Siyahı */
+  --text-muted: #424245;     /* Kurşun Kalem Grisi */
+  --text-dim: #86868B;       /* Silik Gri */
 
-  --border-light: #E8E8ED;
-  --border-dark: #1D1D1F;
+  --border-light: #E8E8ED;   /* İnce Çizgiler */
+  --border-dark: #1D1D1F;    /* Kalın Teknik Çizgiler */
 
-  --color-accent: #5E5CE6; /* Indigo */
+  --grid-color: rgba(0, 0, 0, 0.04); /* Izgara Rengi */
+  --color-accent: #5E5CE6;
+}
+
+/* --- DARK MODE (AutoCAD / Terminal) --- */
+.dark {
+  --bg-main: #09090b;        /* Derin Uzay Siyahı */
+  --bg-secondary: #18181b;   /* Koyu Panel Grisi */
+  --bg-card: #000000;        /* Simsiyah Kartlar */
+
+  --text-main: #EDEDED;      /* Parlak Tebeşir Beyazı */
+  --text-muted: #A1A1AA;     /* Metalik Gri */
+  --text-dim: #52525B;       /* Sönük Gri */
+
+  --border-light: #27272A;   /* Koyu Gri Çizgiler */
+  --border-dark: #FFFFFF;    /* Beyaz Teknik Çizgiler (Zıtlık için) */
+
+  --grid-color: rgba(255, 255, 255, 0.05); /* Izgara Rengi (Beyazımsı) */
+  --color-accent: #818CF8;   /* Neon İndigo */
 }
 
 @layer base {
   html {
-    @apply bg-[var(--bg-main)] text-[var(--text-main)] antialiased scroll-smooth;
+    @apply bg-[var(--bg-main)] text-[var(--text-main)] antialiased scroll-smooth transition-colors duration-300;
   }
   
   body {
     font-family: var(--font-sans);
-    /* High contrast selection for premium feel */
-    @apply selection:bg-[#1D1D1F] selection:text-white overflow-x-hidden relative;
+    @apply selection:bg-[#1D1D1F] selection:text-white dark:selection:bg-white dark:selection:text-black overflow-x-hidden relative;
 
-    /* This sits behind your grain overlay */
+    /* Grid Deseni */
     background-image: 
-        linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
     background-size: 24px 24px;
     min-height: 100vh;
   }
 
-  /* Editorial Headings */
   h1, h2, h3, h4 {
     font-family: var(--font-serif);
   }
 
-  /* CINEMATIC GRAIN OVERLAY */
-  /* This adds the subtle texture that prevents the site from feeling "flat" */
+  /* GRAIN OVERLAY */
   body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* Noise texture */
+    top: 0; left: 0; width: 100%; height: 100%;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 50;
-    opacity: 0.4; /* Subtle grain visibility */
+    opacity: 0.4;
     mix-blend-mode: overlay;
   }
 }
 
 @layer utilities {
-  /* Typography Utilities */
   .font-serif { font-family: var(--font-serif); }
   .font-sans { font-family: var(--font-sans); }
   .font-mono { font-family: var(--font-mono); }
   .font-handwriting { font-family: var(--font-hand); }
-  
-  /* Text Balancing for better headline wrapping */
   .text-balance { text-wrap: balance; }
 
-  /* Glassmorphism Card Utility */
+  /* Glass Card - Dark Mode Uyumlu */
   .glass-card {
-    @apply bg-white/70 backdrop-blur-xl border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+    @apply bg-white/70 dark:bg-black/70 backdrop-blur-xl border border-white/50 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)];
   }
 
-  /* Custom Hover Effects */
   .hover-lift {
     @apply transition-transform duration-300 ease-out hover:-translate-y-1;
   }
@@ -92,4 +98,62 @@
 
 main, section, footer {
   background-color: transparent !important;
+}
+@keyframes glitch-anim {
+  0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, -2px); }
+  10% { clip-path: inset(60% 0 10% 0); transform: translate(2px, 2px); }
+  20% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 2px); }
+  30% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+  40% { clip-path: inset(10% 0 60% 0); transform: translate(-2px, -2px); }
+  50% { clip-path: inset(50% 0 30% 0); transform: translate(2px, 2px); }
+  60% { clip-path: inset(30% 0 50% 0); transform: translate(-2px, 2px); }
+  70% { clip-path: inset(70% 0 20% 0); transform: translate(2px, -2px); }
+  80% { clip-path: inset(15% 0 75% 0); transform: translate(-2px, -2px); }
+  90% { clip-path: inset(55% 0 25% 0); transform: translate(2px, 2px); }
+  100% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, -2px); }
+}
+
+/* Hack Mode Aktifken Uygulanacak Sınıflar */
+.hacked-mode {
+    --text-main: #22c55e !important; /* Terminal Yeşili */
+    --text-muted: #166534 !important; /* Koyu Yeşil */
+    --text-dim: #15803d !important;
+    --bg-main: #000000 !important;
+    --bg-card: #0a0a0a !important;
+    --border-light: #22c55e !important;
+    --border-dark: #22c55e !important;
+}
+
+/* Hack modunda tüm fontları mono yap */
+.hacked-mode * {
+    font-family: var(--font-mono) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* Glitch Image Container */
+.glitch-container img:nth-child(2),
+.glitch-container img:nth-child(3) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Hack aktifken glitch katmanlarını devreye sok */
+.hacked-active .glitch-container img:nth-child(2) {
+    opacity: 0.8;
+    animation: glitch-anim 0.4s infinite linear alternate-reverse;
+    filter: hue-rotate(90deg) contrast(1.5);
+    mix-blend-mode: hard-light;
+}
+.hacked-active .glitch-container img:nth-child(3) {
+    opacity: 0.8;
+    animation: glitch-anim 0.4s infinite linear alternate;
+    filter: hue-rotate(-90deg) contrast(1.5);
+    mix-blend-mode: hard-light;
+    transform: translateX(4px);
 }

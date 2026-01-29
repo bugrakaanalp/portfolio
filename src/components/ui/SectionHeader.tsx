@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
+import React from 'react';
 
 interface SectionHeaderProps {
   label: string;
-  title: string;
-  description?: string;
-  dark?: boolean;
+  title: string | React.ReactNode;
+  description?: string | React.ReactNode;
 }
 
-export default function SectionHeader({ label, title, description, dark = false }: SectionHeaderProps) {
+export default function SectionHeader({ label, title, description }: SectionHeaderProps) {
   return (
     <div className="mb-20 md:mb-32">
       <motion.div
@@ -17,21 +17,29 @@ export default function SectionHeader({ label, title, description, dark = false 
         transition={{ duration: 0.6 }}
       >
         <div className="flex items-center gap-4 mb-6">
-           <div className={`h-px w-8 ${dark ? 'bg-white/30' : 'bg-[#1D1D1F]/30'}`} />
-           <span className={`font-mono text-xs font-medium tracking-[0.2em] uppercase ${dark ? 'text-indigo-300' : 'text-[#86868B]'}`}>
+          {/* Çizgi: Light'ta Siyah, Dark'ta Beyaz (Opaklık ayarlı) */}
+          <div className="h-[2px] w-12 bg-[var(--text-main)] opacity-70" />
+
+          {/* LABEL: Light'ta Gri, Dark'ta Parlak Beyaz */}
+          <span className="
+             font-mono text-xs font-bold tracking-[0.2em] uppercase 
+             text-[var(--text-dim)] dark:text-[var(--text-main)]
+             transition-colors duration-300
+           ">
             {label}
           </span>
         </div>
 
-        {/* Playful/Expressive Typography Treatment */}
-        <h2 className={`text-5xl md:text-7xl font-serif ${dark ? 'text-white' : 'text-[#1D1D1F]'} mb-8`}>
+        {/* Title */}
+        <h2 className="text-5xl md:text-7xl font-serif text-[var(--text-main)] mb-8 leading-[1.1]">
           {title}
         </h2>
 
+        {/* Description */}
         {description && (
-          <p className={`max-w-xl text-lg md:text-xl font-sans font-light leading-relaxed ${dark ? 'text-white/60' : 'text-[#424245]'} text-balance`}>
+          <div className="max-w-xl text-lg md:text-xl font-sans font-light leading-relaxed text-[var(--text-muted)] text-balance">
             {description}
-          </p>
+          </div>
         )}
       </motion.div>
     </div>

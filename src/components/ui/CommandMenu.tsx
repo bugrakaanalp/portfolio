@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
+import {
   Search,
-  Laptop, 
-  FileText, 
-  Mail, 
-  Github, 
+  Laptop,
+  FileText,
+  Mail,
+  Github,
   Code,
   CreditCard,
   Home
 } from 'lucide-react';
 import { useCommandMenu } from '../../context/CommandMenuContext';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useLanguage } from '../../context/LanguageContext'; // <--- EKLE
+import { useLanguage } from '../../context/LanguageContext';
 
 export default function CommandMenu() {
   const { isOpen, toggle, close } = useCommandMenu();
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useLanguage(); // <--- DİL FONKSİYONUNU ÇAĞIR
+  const { t } = useLanguage(); // <--- DİL FONKSİYONU
 
   // Klavye kısayolu dinleyicisi
   useEffect(() => {
@@ -39,8 +39,8 @@ export default function CommandMenu() {
 
   // Akıllı Yönlendirme Fonksiyonu
   const handleNavigation = (path: string, hash?: string) => {
-    close(); 
-    
+    close();
+
     // Dış link kontrolü
     if (path.startsWith('http') || path.startsWith('mailto')) {
       window.open(path, '_blank');
@@ -66,60 +66,59 @@ export default function CommandMenu() {
     }
   };
 
-  // Eylemleri t() fonksiyonu ile çevrilebilir hale getirdik
   const actions = [
-    { 
-      id: 'home', 
-      label: t('Home', 'Ana Sayfa'), 
-      icon: Home, 
-      shortcut: 'H', 
-      action: () => handleNavigation('/') 
+    {
+      id: 'home',
+      label: t('Home', 'Ana Sayfa'),
+      icon: Home,
+      shortcut: 'H',
+      action: () => handleNavigation('/')
     },
-    { 
-      id: 'services', 
-      label: t('Services & Pricing', 'Hizmetler & Fiyatlandırma'), 
-      icon: CreditCard, 
-      shortcut: 'S', 
-      action: () => handleNavigation('/services') 
+    {
+      id: 'services',
+      label: t('Services & Pricing', 'Hizmetler & Fiyatlandırma'),
+      icon: CreditCard,
+      shortcut: 'S',
+      action: () => handleNavigation('/services')
     },
-    { 
-      id: 'work', 
-      label: t('Go to Projects', 'Projelere Git'), 
-      icon: Code, 
-      shortcut: 'P', 
-      action: () => handleNavigation('/', 'work') 
+    {
+      id: 'work',
+      label: t('Go to Projects', 'Projelere Git'),
+      icon: Code,
+      shortcut: 'P',
+      action: () => handleNavigation('/', 'work')
     },
-    { 
-      id: 'stack', 
-      label: t('View Tech Stack', 'Teknoloji Yığınını Gör'), 
-      icon: Laptop, 
-      shortcut: 'T', 
-      action: () => handleNavigation('/', 'expertise') 
+    {
+      id: 'stack',
+      label: t('View Tech Stack', 'Teknoloji Yığınını Gör'),
+      icon: Laptop,
+      shortcut: 'T',
+      action: () => handleNavigation('/', 'expertise')
     },
-    { 
-      id: 'about', 
-      label: t('Read Profile', 'Profili Oku'), 
-      icon: FileText, 
-      shortcut: 'A', 
-      action: () => handleNavigation('/', 'about') 
+    {
+      id: 'about',
+      label: t('Read Profile', 'Profili Oku'),
+      icon: FileText,
+      shortcut: 'A',
+      action: () => handleNavigation('/', 'about')
     },
-    { 
-      id: 'contact', 
-      label: t('Send Email', 'E-posta Gönder'), 
-      icon: Mail, 
-      shortcut: 'E', 
-      action: () => window.location.assign('mailto:bugrakaanalp19@gmail.com') 
+    {
+      id: 'contact',
+      label: t('Send Email', 'E-posta Gönder'),
+      icon: Mail,
+      shortcut: 'E',
+      action: () => window.location.assign('mailto:bugrakaanalp19@gmail.com')
     },
-    { 
-      id: 'source', 
-      label: t('View Source Code', 'Kaynak Kodunu Gör'), 
-      icon: Github, 
-      shortcut: 'G', 
-      action: () => window.open('https://github.com/bugrakaanalp/portfolio', '_blank') 
+    {
+      id: 'source',
+      label: t('View Source Code', 'Kaynak Kodunu Gör'),
+      icon: Github,
+      shortcut: 'G',
+      action: () => window.open('https://github.com/bugrakaanalp/portfolio', '_blank')
     },
   ];
 
-  const filteredActions = actions.filter(action => 
+  const filteredActions = actions.filter(action =>
     action.label.toLowerCase().includes(query.toLowerCase())
   );
 
@@ -127,7 +126,7 @@ export default function CommandMenu() {
     <AnimatePresence>
       {isOpen && (
         <>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -136,7 +135,7 @@ export default function CommandMenu() {
           />
 
           <div className="fixed inset-0 z-[101] flex items-start justify-center pt-[15vh] px-4 pointer-events-none">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, scale: 0.95, y: -20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
@@ -153,14 +152,14 @@ export default function CommandMenu() {
             >
               <div className="flex items-center px-4 py-4 border-b border-[var(--border-light)]">
                 <Search className="w-5 h-5 text-[var(--text-dim)]" />
-                <input 
+                <input
                   autoFocus
                   className="flex-1 bg-transparent border-none outline-none px-4 text-lg font-sans text-[var(--text-main)] placeholder-[var(--text-dim)]"
                   placeholder={t("Type a command...", "Bir komut yazın...")} // <--- ÇEVİRİ
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
-                <button 
+                <button
                   onClick={close}
                   className="px-2 py-1 bg-[var(--bg-secondary)] rounded text-[10px] font-mono text-[var(--text-dim)] uppercase tracking-wider border border-[var(--border-light)] hover:bg-[var(--border-light)] transition-colors"
                 >

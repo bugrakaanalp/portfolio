@@ -1,10 +1,10 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface CommandMenuContextType {
   isOpen: boolean;
   toggle: () => void;
-  open: () => void;
   close: () => void;
+  setIsOpen: (value: boolean) => void;
 }
 
 const CommandMenuContext = createContext<CommandMenuContextType | undefined>(undefined);
@@ -12,22 +12,33 @@ const CommandMenuContext = createContext<CommandMenuContextType | undefined>(und
 export function CommandMenuProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
-  const open = useCallback(() => setIsOpen(true), []);
-  const close = useCallback(() => setIsOpen(false), []);
+  // Klavye Kısayolu (CTRL+K veya CMD+K)
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setIsOpen((prev) => !prev);
+      }
+    };
+
+    document.addEventListener('keydown', down);
+    return () => document.removeEventListener('keydown', down);
+  }, []);
+
+  const toggle = () => setIsOpen((prev) => !prev);
+  const close = () => setIsOpen(false);
 
   return (
-    <CommandMenuContext.Provider value={{ isOpen, toggle, open, close }}>
+    <CommandMenuContext.Provider value={{ isOpen, toggle, close, setIsOpen }}>
       {children}
     </CommandMenuContext.Provider>
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
-export function useCommandMenu() {
+export const useCommandMenu = () => {
   const context = useContext(CommandMenuContext);
   if (context === undefined) {
     throw new Error('useCommandMenu must be used within a CommandMenuProvider');
   }
   return context;
-}
+};
