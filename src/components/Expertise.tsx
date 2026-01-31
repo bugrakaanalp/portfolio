@@ -3,12 +3,18 @@ import SectionHeader from './ui/SectionHeader';
 import Section from './ui/Section';
 import { useLanguage } from '../context/LanguageContext';
 
+// İkon Paketleri
 import {
-  SiNextdotjs, SiReact, SiTypescript, SiTurborepo,
-  SiTailwindcss, SiFramer, SiGreensock, SiStorybook,
+  SiNextdotjs, SiReact, SiTypescript,
+  SiTailwindcss, SiFramer,
   SiReactquery, SiPostgresql, SiPrisma,
-  SiDocker, SiVercel, SiAmazon, SiGithubactions
+  SiDocker, SiVercel, SiAmazon, SiGithubactions,
+  SiDotnet
 } from 'react-icons/si';
+
+// C# ve MSSQL için alternatif ikonlar
+import { TbBrandCSharp } from 'react-icons/tb';
+import { DiMsqlServer } from 'react-icons/di';
 import { Layers } from 'lucide-react';
 
 export default function Expertise() {
@@ -17,52 +23,52 @@ export default function Expertise() {
   const stack = [
     {
       id: "01",
-      category: t("Core Architecture", "Çekirdek Mimari"),
+      category: t("Frontend Core", "Frontend Çekirdek"),
       desc: t(
-        "The foundational frameworks for scalable, type-safe web applications.",
-        "Ölçeklenebilir, tip güvenli web uygulamaları için temel iskeletler."
+        "High-performance user interfaces with modern React ecosystem.",
+        "Modern React ekosistemi ile yüksek performanslı arayüzler."
       ),
       tools: [
         { name: "Next.js", icon: SiNextdotjs, color: "hover:text-black dark:hover:text-white" },
         { name: "React 19", icon: SiReact, color: "hover:text-[#61DAFB]" },
         { name: "TypeScript", icon: SiTypescript, color: "hover:text-[#3178C6]" },
-        { name: "Turborepo", icon: SiTurborepo, color: "hover:text-[#EF4444]" }
+        { name: "Tailwind CSS", icon: SiTailwindcss, color: "hover:text-[#06B6D4]" }
       ]
     },
     {
       id: "02",
-      category: t("Visual Engineering", "Görsel Mühendislik"),
+      category: t("Backend Architecture", "Backend Mimarisi"),
       desc: t(
-        "Tools for translating design systems into fluid, responsive interfaces.",
-        "Tasarım sistemlerini akıcı, duyarlı arayüzlere dönüştüren araçlar."
+        "Robust server-side solutions powered by .NET and strong typing.",
+        ".NET ve güçlü tipleme ile desteklenen sağlam sunucu taraflı çözümler."
       ),
       tools: [
-        { name: "Tailwind CSS", icon: SiTailwindcss, color: "hover:text-[#06B6D4]" },
-        { name: "Framer Motion", icon: SiFramer, color: "hover:text-[#0055FF]" },
-        { name: "GSAP", icon: SiGreensock, color: "hover:text-[#88CE02]" },
-        { name: "Storybook", icon: SiStorybook, color: "hover:text-[#FF4785]" }
+        { name: "C#", icon: TbBrandCSharp, color: "hover:text-[#239120] dark:hover:text-[#9B4F96]" },
+        { name: ".NET Core", icon: SiDotnet, color: "hover:text-[#512BD4]" },
+        { name: "SQL Server", icon: DiMsqlServer, color: "hover:text-[#CC2927]" },
+        { name: "PostgreSQL", icon: SiPostgresql, color: "hover:text-[#4169E1]" }
       ]
     },
     {
       id: "03",
       category: t("Data & State", "Veri & Durum"),
       desc: t(
-        "Strategies for efficient data fetching, caching, and synchronization.",
-        "Verimli veri çekme, önbellekleme ve senkronizasyon stratejileri."
+        "Synchronizing app state with server data and real-time streams.",
+        "Uygulama durumunu sunucu verileri ve gerçek zamanlı akışlarla senkronize etme."
       ),
       tools: [
         { name: "TanStack Query", icon: SiReactquery, color: "hover:text-[#FF4154]" },
+        { name: "Prisma ORM", icon: SiPrisma, color: "hover:text-[#2D3748] dark:hover:text-white" },
         { name: "Zustand", icon: Layers, color: "hover:text-[#443E38] dark:hover:text-[#E8DCC8]" },
-        { name: "PostgreSQL", icon: SiPostgresql, color: "hover:text-[#4169E1]" },
-        { name: "Prisma", icon: SiPrisma, color: "hover:text-[#2D3748] dark:hover:text-white" }
+        { name: "Framer Motion", icon: SiFramer, color: "hover:text-[#0055FF]" }
       ]
     },
     {
       id: "04",
       category: t("DevOps & Cloud", "DevOps & Bulut"),
       desc: t(
-        "CI/CD pipelines and infrastructure as code.",
-        "CI/CD süreçleri ve kod olarak altyapı."
+        "Containerization, CI/CD pipelines, and serverless deployment.",
+        "Konteynerizasyon, CI/CD süreçleri ve sunucusuz dağıtım."
       ),
       tools: [
         { name: "Docker", icon: SiDocker, color: "hover:text-[#2496ED]" },
@@ -74,72 +80,83 @@ export default function Expertise() {
   ];
 
   return (
-    // ZEMİN
     <Section id="expertise" className="border-t-2 border-[var(--border-dark)] !py-0 bg-[var(--bg-main)] transition-colors duration-300">
       <Container>
-        <div className="pt-16 pb-8">
+        {/* HEADER KISMI: Padding bottom (pb) kaldırıldı */}
+        <div className="pt-20 pb-0">
           <SectionHeader
             label={t("The Stack", "Birikimim")}
             title={t("Technical Specifications", "Teknik Birikim")}
             description={t(
-              "A curated toolset selected for precision, scalability, and developer experience.",
-              "Hassasiyet, ölçeklenebilirlik ve geliştirici deneyimi için seçilmiş özel araç seti."
+              "A hybrid arsenal combining the speed of JS with the stability of .NET.",
+              "JS'nin hızı ile .NET'in kararlılığını birleştiren hibrit bir cephanelik."
             )}
           />
         </div>
 
-        {/* Tablo Çizgileri */}
-        <div className="flex flex-col border-t-2 border-[var(--border-light)]">
+        {/* KUTULAR LISTESI */}
+        <div className="flex flex-col gap-8 pb-20 -mt-12 md:-mt-24">
           {stack.map((item, idx) => (
             <div
               key={idx}
               className="
-                group relative grid grid-cols-1 md:grid-cols-12 gap-y-6 md:gap-12 
-                py-10 md:py-12 
-                pl-4 md:pl-6
-                border-b border-[var(--border-light)] 
-                transition-all duration-300
-                hover:bg-[var(--bg-secondary)]
+                group relative grid grid-cols-1 md:grid-cols-12 gap-y-8 md:gap-12
+                p-8 md:p-12
+                bg-[var(--bg-card)]
+                border-2 border-[var(--border-light)]
+                transition-all duration-300 ease-out
+                hover:border-[var(--text-main)] 
+                hover:-translate-y-1 
+                hover:shadow-[8px_8px_0px_0px_var(--border-light)]
+                hover:z-10
               "
             >
-              {/* Aktif Çizgisi */}
-              <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-[var(--text-main)] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
 
-              <div className="md:col-span-4 flex flex-col justify-center">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="font-mono text-xs text-[var(--text-dim)] font-bold uppercase tracking-widest">
-                    {item.id}
-                  </span>
-                  <span className="w-8 h-px bg-[var(--border-light)] group-hover:bg-[var(--text-main)] transition-colors" />
-                  <span className="font-mono text-sm text-[var(--text-main)] uppercase tracking-widest font-bold">
+              {/* SOL TARAFA: BAŞLIK & AÇIKLAMA */}
+              <div className="md:col-span-5 flex flex-col justify-center relative">
+
+                {/* ID Numarası (Background Number) */}
+                <span className="
+                    absolute -top-6 -left-2 text-6xl md:text-8xl font-black font-mono 
+                    text-[var(--border-light)] opacity-30 group-hover:opacity-10 
+                    select-none transition-opacity
+                ">
+                  {item.id}
+                </span>
+
+                <div className="relative z-10 pt-4">
+                  <h3 className="font-serif text-3xl md:text-4xl text-[var(--text-main)] font-bold mb-4">
                     {item.category}
-                  </span>
+                  </h3>
+
+                  <div className="w-12 h-1 bg-[var(--text-main)] mb-6 transition-all duration-300 group-hover:w-24" />
+
+                  <p className="font-mono text-sm text-[var(--text-muted)] leading-relaxed">
+                    {`// ${item.desc}`}
+                  </p>
                 </div>
-                <p className="font-mono text-xs text-[var(--text-muted)] leading-relaxed max-w-[280px]">
-                  {`// ${item.desc}`}
-                </p>
               </div>
 
-              <div className="md:col-span-8 flex items-center">
-                <div className="flex flex-wrap gap-x-12 gap-y-8">
+              {/* SAĞ TARAFA: ARAÇLAR (ICONLAR) */}
+              <div className="md:col-span-7 flex items-center md:justify-end">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 w-full">
                   {item.tools.map((tool, tIdx) => (
                     <div
                       key={tIdx}
                       className={`
-                        flex items-center gap-3 group/tool cursor-default
+                        flex flex-col items-center justify-center gap-3 p-4
+                        border border-[var(--border-light)] bg-[var(--bg-main)]
+                        group/tool cursor-default
                         text-[var(--text-dim)] transition-all duration-300
+                        hover:border-[var(--text-dim)]
                         ${tool.color}
                       `}
                     >
-                      <tool.icon className="w-6 h-6 md:w-8 md:h-8 transition-transform duration-300 group-hover/tool:scale-110" />
+                      <tool.icon className="w-8 h-8 transition-transform duration-300 group-hover/tool:scale-110 group-hover/tool:-translate-y-1" />
 
                       <span className="
-                        font-serif text-xl md:text-2xl text-[var(--text-muted)]
-                        group-hover/tool:text-[var(--text-main)] transition-colors
-                        relative
-                        after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] 
-                        after:bg-current
-                        after:scale-x-0 after:origin-right hover:after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-300
+                        font-sans text-xs font-bold uppercase tracking-wider text-[var(--text-muted)]
+                        group-hover/tool:text-[var(--text-main)] transition-colors text-center
                       ">
                         {tool.name}
                       </span>
